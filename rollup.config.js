@@ -19,7 +19,7 @@ export default {
   external: [
     // keep cjs deps as external; only bundle esm ones
     'cli-table3',
-    'cardinal',
+    '@babel/highlight',
     'node-emoji',
     'supports-hyperlinks',
     'node:process',

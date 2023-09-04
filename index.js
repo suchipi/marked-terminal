@@ -2,7 +2,7 @@
 
 import chalk from 'chalk';
 import Table from 'cli-table3';
-import cardinal from 'cardinal';
+import babelHighlight from '@babel/highlight';
 import emoji from 'node-emoji';
 import ansiEscapes from 'ansi-escapes';
 import supportsHyperlinks from 'supports-hyperlinks';
@@ -51,13 +51,12 @@ var defaultOptions = {
   tableOptions: {}
 };
 
-function Renderer(options, highlightOptions) {
+function Renderer(options) {
   this.o = Object.assign({}, defaultOptions, options);
   this.tab = sanitizeTab(this.o.tab, defaultOptions.tab);
   this.tableSettings = this.o.tableOptions;
   this.emoji = this.o.emoji ? insertEmojis : identity;
   this.unescape = this.o.unescape ? unescapeEntities : identity;
-  this.highlightOptions = highlightOptions || {};
 
   this.transform = compose(undoColon, this.unescape, this.emoji);
 }
@@ -79,9 +78,7 @@ Renderer.prototype.text = function (text) {
 };
 
 Renderer.prototype.code = function (code, lang, escaped) {
-  return section(
-    indentify(this.tab, highlight(code, lang, this.o, this.highlightOptions))
-  );
+  return section(indentify(this.tab, highlight(code, lang, this.o)));
 };
 
 Renderer.prototype.blockquote = function (quote) {
@@ -418,18 +415,27 @@ function section(text) {
   return text + '\n\n';
 }
 
-function highlight(code, lang, opts, hightlightOpts) {
+const langsToHighlight = new Set([
+  'javascript',
+  'js',
+  'jsx',
+  'typescript',
+  'ts',
+  'tsx'
+]);
+
+function highlight(code, lang, opts) {
   if (chalk.level === 0) return code;
 
   var style = opts.code;
 
   code = fixHardReturn(code, opts.reflowText);
-  if (lang !== 'javascript' && lang !== 'js') {
+  if (!langsToHighlight.has(lang)) {
     return style(code);
   }
 
   try {
-    return cardinal.highlight(code, hightlightOpts);
+    return babelHighlight(code, { forceColor: true });
   } catch (e) {
     return style(code);
   }
