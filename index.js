@@ -24,6 +24,11 @@ var HARD_RETURN = '\r',
   HARD_RETURN_RE = new RegExp(HARD_RETURN),
   HARD_RETURN_GFM_RE = new RegExp(HARD_RETURN + '|<br />');
 
+function highlightWithBabel(code) {
+  // yes, `.default` on the default export. CJS <-> ESM interop is a mess.
+  return babelHighlight.default(code, { forceColor: true });
+}
+
 var defaultOptions = {
   code: chalk.yellow,
   blockquote: chalk.gray.italic,
@@ -48,7 +53,15 @@ var defaultOptions = {
   showSectionPrefix: true,
   reflowText: false,
   tab: 4,
-  tableOptions: {}
+  tableOptions: {},
+  syntaxHighlighters: {
+    javascript: highlightWithBabel,
+    js: highlightWithBabel,
+    jsx: highlightWithBabel,
+    typescript: highlightWithBabel,
+    ts: highlightWithBabel,
+    tsx: highlightWithBabel
+  }
 };
 
 function Renderer(options) {
@@ -415,30 +428,17 @@ function section(text) {
   return text + '\n\n';
 }
 
-const langsToHighlight = new Set([
-  'javascript',
-  'js',
-  'jsx',
-  'typescript',
-  'ts',
-  'tsx'
-]);
-
 function highlight(code, lang, opts) {
   if (chalk.level === 0) return code;
 
   var style = opts.code;
 
   code = fixHardReturn(code, opts.reflowText);
-  if (!langsToHighlight.has(lang)) {
-    return style(code);
-  }
 
-  try {
-    // yes, `.default` on the default export. CJS <-> ESM interop is a mess.
-    return babelHighlight.default(code, { forceColor: true });
-  } catch (e) {
-    console.warn(e);
+  if (opts.syntaxHighlighters && opts.syntaxHighlighters[lang]) {
+    const highlighterFunction = opts.syntaxHighlighters[lang];
+    return highlighterFunction(code);
+  } else {
     return style(code);
   }
 }
