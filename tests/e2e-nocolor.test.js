@@ -18,31 +18,28 @@ function getFixtureFile(fileName) {
   );
 }
 
-var opts = [
-  'code',
-  'blockquote',
-  'html',
-  'heading',
-  'firstHeading',
-  'hr',
-  'listitem',
-  'table',
-  'paragraph',
-  'strong',
-  'em',
-  'codespan',
-  'del',
-  'link',
-  'href'
-];
-
-var defaultOptions = {};
-opts.forEach(function (opt) {
-  defaultOptions[opt] = (x) => x;
-});
+function identity(x) {
+  return x;
+}
 
 function markup(str) {
-  var r = new Renderer(defaultOptions);
+  var r = new Renderer({
+    code: identity,
+    blockquote: identity,
+    html: identity,
+    heading: identity,
+    firstHeading: identity,
+    hr: identity,
+    listitem: identity,
+    table: identity,
+    paragraph: identity,
+    strong: identity,
+    em: identity,
+    codespan: identity,
+    del: identity,
+    link: identity,
+    href: identity
+  });
   return stripTermEsc(marked(str, { renderer: r }));
 }
 
