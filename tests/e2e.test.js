@@ -1,6 +1,6 @@
-import { equal } from 'assert';
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
+import { describe, it, expect } from 'vitest';
 import Renderer from '../index.js';
 import marked from './_marked.js';
 import { fileURLToPath } from 'url';
@@ -53,7 +53,7 @@ function markup(str) {
 describe('e2', function () {
   it('should render a document full of different supported syntax', function () {
     const actual = markup(getFixtureFile('e2e.md'));
-    const expected = getFixtureFile('e2e.result.txt');
-    equal(actual, expected);
+
+    expect(actual).toMatchSnapshot();
   });
 });

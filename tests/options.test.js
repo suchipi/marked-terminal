@@ -1,4 +1,5 @@
 import { notEqual, equal } from 'assert';
+import { describe, it } from 'vitest';
 import Renderer from '../index.js';
 import marked from './_marked.js';
 

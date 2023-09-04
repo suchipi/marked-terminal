@@ -1,4 +1,7 @@
-It's very easy to make some words bold and other words italic with Markdown. You can even link to Google! (http://google.com)
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`e2 > should render a document full of different supported syntax 1`] = `
+"It's very easy to make some words bold and other words italic with Markdown. You can even link to Google! (http://google.com)
 
 Sometimes you want numbered lists:
 
@@ -60,3 +63,5 @@ And if you'd like to use syntax highlighting, include the language:
       return true
     }
 
+"
+`;

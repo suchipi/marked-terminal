@@ -18,7 +18,7 @@
   "scripts": {
     "build": "rollup -c",
     "prepack": "npm run build",
-    "test": "FORCE_HYPERLINK=0 mocha tests/*.js --reporter spec"
+    "test": "vitest"
   },
   "files": [
     "index.js",
@@ -51,8 +51,8 @@
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "marked": "^5.0.2",
-    "mocha": "^10.2.0",
-    "rollup": "^3.21.7"
+    "rollup": "^3.21.7",
+    "vitest": "^0.34.3"
   },
   "repository": {
     "type": "git",
