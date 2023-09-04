@@ -1,0 +1,67 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`e2e > should render a document full of different supported syntax 1`] = `
+"It's very easy to make some words [1mbold[22m and other words [3mitalic[23m with Markdown. You can even [34mlink to Google! ([34m[4mhttp://google.com[24m[39m[34m)[39m
+
+Sometimes you want numbered lists:
+
+    1. One
+    2. Two
+    3. Three
+
+Sometimes you want bullet points:
+
+    * Start a line with a star
+    * Profit!
+
+Alternatively,
+
+    * Dashes work just as well
+    * And if you have sub points,
+      put two spaces before the dash or star:
+        * Like this
+        * And this
+    * Lorem
+        * Ipsum
+        * Dolor
+
+But also,
+
+    1. And not to forget
+       numbered lists
+        1. Can also have
+        2. Several sub points
+
+[35m[4m[1m# Structured documents[22m[24m[39m
+
+Sometimes it's useful to have different levels of headings to structure your documents. Start lines with a [33m#[39m to create headings. Multiple [33m##[39m in a row denote smaller heading sizes.
+
+[32m[1m### This is a third-tier heading[22m[39m
+
+You can use one [33m#[39m all the way up to [33m######[39m six for different heading sizes.
+
+If you'd like to quote someone, use the > character before the line:
+
+[90m[3m    Coffee. The finest organic suspension ever devised... I beat the Borg with it.[23m[39m
+[90m[3m    - Captain Janeway[23m[39m
+
+There are many different ways to style code with GitHub's markdown. If you have inline code blocks, wrap them in backticks: [33mvar example = true[39m.  If you've got a longer block of code, you can indent with four spaces:
+
+    [33mif (isAwesome){[39m
+    [33m  return true[39m
+    [33m}[39m
+
+GitHub also supports something called code fencing, which allows for multiple lines without indentation:
+
+    [33mif (isAwesome){[39m
+    [33m  return true[39m
+    [33m}[39m
+
+And if you'd like to use syntax highlighting, include the language:
+
+    <JS_START>if (isAwesome){
+      return true
+    }<JS_END>
+
+"
+`;
