@@ -2,7 +2,6 @@
 
 import chalk from 'chalk';
 import Table from 'cli-table3';
-import babelHighlight from '@babel/highlight';
 import emoji from 'node-emoji';
 import ansiEscapes from 'ansi-escapes';
 import supportsHyperlinks from 'supports-hyperlinks';
@@ -23,11 +22,6 @@ var TAB_ALLOWED_CHARACTERS = ['\t'];
 var HARD_RETURN = '\r',
   HARD_RETURN_RE = new RegExp(HARD_RETURN),
   HARD_RETURN_GFM_RE = new RegExp(HARD_RETURN + '|<br />');
-
-function highlightWithBabel(code) {
-  // yes, `.default` on the default export. CJS <-> ESM interop is a mess.
-  return babelHighlight.default(code, { forceColor: true });
-}
 
 var defaultOptions = {
   code: chalk.yellow,
@@ -54,14 +48,7 @@ var defaultOptions = {
   reflowText: false,
   tab: 4,
   tableOptions: {},
-  syntaxHighlighters: {
-    javascript: highlightWithBabel,
-    js: highlightWithBabel,
-    jsx: highlightWithBabel,
-    typescript: highlightWithBabel,
-    ts: highlightWithBabel,
-    tsx: highlightWithBabel
-  }
+  syntaxHighlighters: {}
 };
 
 function Renderer(options) {
