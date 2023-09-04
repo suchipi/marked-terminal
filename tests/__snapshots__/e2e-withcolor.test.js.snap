@@ -59,9 +59,9 @@ GitHub also supports something called code fencing, which allows for multiple li
 
 And if you'd like to use syntax highlighting, include the language:
 
-    [36mif[39m (isAwesome){
-      [36mreturn[39m [36mtrue[39m
-    }
+    [33mif (isAwesome){[39m
+    [33m  return true[39m
+    [33m}[39m
 
 "
 `;

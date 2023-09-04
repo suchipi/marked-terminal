@@ -435,8 +435,10 @@ function highlight(code, lang, opts) {
   }
 
   try {
-    return babelHighlight(code, { forceColor: true });
+    // yes, `.default` on the default export. CJS <-> ESM interop is a mess.
+    return babelHighlight.default(code, { forceColor: true });
   } catch (e) {
+    console.warn(e);
     return style(code);
   }
 }
